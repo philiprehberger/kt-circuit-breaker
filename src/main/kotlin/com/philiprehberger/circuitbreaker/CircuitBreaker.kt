@@ -16,8 +16,8 @@ import java.util.concurrent.atomic.AtomicReference
  * @property name A descriptive name for this circuit breaker (used in exception messages).
  * @property config The configuration for this circuit breaker.
  */
-class CircuitBreaker(
-    val name: String,
+public class CircuitBreaker(
+    public val name: String,
     private val config: CircuitBreakerConfig,
 ) {
     private val stateRef = AtomicReference(CircuitState.CLOSED)
@@ -26,7 +26,7 @@ class CircuitBreaker(
     private val openedAt = AtomicLong(0L)
 
     /** The current state of the circuit breaker. */
-    val state: CircuitState get() = stateRef.get()
+    public val state: CircuitState get() = stateRef.get()
 
     /**
      * Executes [block] if the circuit allows it.
@@ -37,7 +37,7 @@ class CircuitBreaker(
      * @throws CircuitOpenException If the circuit is open and the reset timeout has not elapsed.
      * @throws Throwable Any exception thrown by [block] (after recording the failure).
      */
-    suspend fun <T> execute(block: suspend () -> T): T {
+    public suspend fun <T> execute(block: suspend () -> T): T {
         val currentState = checkState()
         if (currentState == CircuitState.OPEN) {
             throw CircuitOpenException("Circuit breaker '$name' is OPEN")

@@ -3,7 +3,7 @@ package com.philiprehberger.circuitbreaker
 /**
  * Represents the possible states of a circuit breaker.
  */
-enum class CircuitState {
+public enum class CircuitState {
     /** Circuit is closed; requests flow through normally. */
     CLOSED,
 
