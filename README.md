@@ -1,13 +1,10 @@
-# kt-circuit-breaker
+# circuit-breaker
 
 [![CI](https://github.com/philiprehberger/kt-circuit-breaker/actions/workflows/publish.yml/badge.svg)](https://github.com/philiprehberger/kt-circuit-breaker/actions/workflows/publish.yml)
 [![Maven Central](https://img.shields.io/maven-central/v/com.philiprehberger/circuit-breaker)](https://central.sonatype.com/artifact/com.philiprehberger/circuit-breaker)
+[![License](https://img.shields.io/github/license/philiprehberger/kt-circuit-breaker)](LICENSE)
 
 Coroutine-aware circuit breaker for resilient Kotlin services.
-
-## Requirements
-
-- Kotlin 1.9+ / Java 17+
 
 ## Installation
 
@@ -15,7 +12,7 @@ Coroutine-aware circuit breaker for resilient Kotlin services.
 
 ```kotlin
 dependencies {
-    implementation("com.philiprehberger:circuit-breaker:0.1.0")
+    implementation("com.philiprehberger:circuit-breaker:0.1.5")
 }
 ```
 
@@ -33,7 +30,7 @@ dependencies {
 <dependency>
     <groupId>com.philiprehberger</groupId>
     <artifactId>circuit-breaker</artifactId>
-    <version>0.1.0</version>
+    <version>0.1.5</version>
 </dependency>
 ```
 
