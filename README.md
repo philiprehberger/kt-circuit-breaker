@@ -1,6 +1,6 @@
 # circuit-breaker
 
-[![CI](https://github.com/philiprehberger/kt-circuit-breaker/actions/workflows/publish.yml/badge.svg)](https://github.com/philiprehberger/kt-circuit-breaker/actions/workflows/publish.yml)
+[![Tests](https://github.com/philiprehberger/kt-circuit-breaker/actions/workflows/publish.yml/badge.svg)](https://github.com/philiprehberger/kt-circuit-breaker/actions/workflows/publish.yml)
 [![Maven Central](https://img.shields.io/maven-central/v/com.philiprehberger/circuit-breaker)](https://central.sonatype.com/artifact/com.philiprehberger/circuit-breaker)
 [![License](https://img.shields.io/github/license/philiprehberger/kt-circuit-breaker)](LICENSE)
 
@@ -11,17 +11,7 @@ Coroutine-aware circuit breaker for resilient Kotlin services.
 ### Gradle (Kotlin DSL)
 
 ```kotlin
-dependencies {
-    implementation("com.philiprehberger:circuit-breaker:0.1.5")
-}
-```
-
-### Gradle (Groovy)
-
-```groovy
-dependencies {
-    implementation 'com.philiprehberger:circuit-breaker:0.1.0'
-}
+implementation("com.philiprehberger:circuit-breaker:0.1.6")
 ```
 
 ### Maven
@@ -30,7 +20,7 @@ dependencies {
 <dependency>
     <groupId>com.philiprehberger</groupId>
     <artifactId>circuit-breaker</artifactId>
-    <version>0.1.5</version>
+    <version>0.1.6</version>
 </dependency>
 ```
 
