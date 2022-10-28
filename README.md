@@ -11,7 +11,7 @@ Coroutine-aware circuit breaker for resilient Kotlin services.
 ### Gradle (Kotlin DSL)
 
 ```kotlin
-implementation("com.philiprehberger:circuit-breaker:0.1.6")
+implementation("com.philiprehberger:circuit-breaker:0.2.0")
 ```
 
 ### Maven
@@ -20,7 +20,7 @@ implementation("com.philiprehberger:circuit-breaker:0.1.6")
 <dependency>
     <groupId>com.philiprehberger</groupId>
     <artifactId>circuit-breaker</artifactId>
-    <version>0.1.6</version>
+    <version>0.2.0</version>
 </dependency>
 ```
 
@@ -66,6 +66,32 @@ val breaker = circuitBreaker("api") {
 }
 ```
 
+### Fallback
+
+```kotlin
+val result = breaker.executeWithFallback(
+    fallback = { cachedResponse() }
+) {
+    callExternalService()
+}
+```
+
+### Manual State Control
+
+```kotlin
+breaker.forceOpen()    // Stop all requests
+breaker.forceClosed()  // Resume requests
+breaker.forceHalfOpen() // Enter test mode
+breaker.reset()        // Full reset to closed
+```
+
+### Metrics
+
+```kotlin
+val metrics = breaker.metrics()
+println("State: ${metrics.state}, Failures: ${metrics.totalFailures}")
+```
+
 ## API
 
 | Class / Function | Description |
@@ -75,6 +101,13 @@ val breaker = circuitBreaker("api") {
 | `CircuitState` | Enum: `CLOSED`, `OPEN`, `HALF_OPEN` |
 | `CircuitBreakerConfig` | Configuration data class with thresholds and timeout |
 | `CircuitOpenException` | Thrown when the circuit is open |
+| `CircuitBreaker.executeWithFallback()` | Execute with automatic fallback when open |
+| `CircuitBreaker.forceOpen()` | Force circuit to OPEN state |
+| `CircuitBreaker.forceClosed()` | Force circuit to CLOSED state |
+| `CircuitBreaker.forceHalfOpen()` | Force circuit to HALF_OPEN state |
+| `CircuitBreaker.reset()` | Reset to CLOSED with zeroed counters |
+| `CircuitBreaker.metrics()` | Get current state and failure/success counts |
+| `CircuitMetrics` | Data class with state, failures, successes |
 
 ## Development
 

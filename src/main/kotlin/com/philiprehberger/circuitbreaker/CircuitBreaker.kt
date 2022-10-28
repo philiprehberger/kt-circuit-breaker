@@ -55,6 +55,65 @@ public class CircuitBreaker(
         }
     }
 
+    /**
+     * Executes [block] if the circuit allows it, falling back to [fallback] when the circuit is open.
+     *
+     * @param T The return type.
+     * @param fallback The fallback block to execute when the circuit is open.
+     * @param block The primary block to execute.
+     * @return The result of [block] or [fallback].
+     */
+    public suspend fun <T> executeWithFallback(fallback: suspend () -> T, block: suspend () -> T): T {
+        return try {
+            execute(block)
+        } catch (_: CircuitOpenException) {
+            fallback()
+        }
+    }
+
+    /**
+     * Forces the circuit breaker into the [CircuitState.OPEN] state.
+     */
+    public fun forceOpen() {
+        transitionTo(CircuitState.OPEN)
+    }
+
+    /**
+     * Forces the circuit breaker into the [CircuitState.CLOSED] state.
+     */
+    public fun forceClosed() {
+        transitionTo(CircuitState.CLOSED)
+    }
+
+    /**
+     * Forces the circuit breaker into the [CircuitState.HALF_OPEN] state.
+     */
+    public fun forceHalfOpen() {
+        transitionTo(CircuitState.HALF_OPEN)
+    }
+
+    /**
+     * Resets the circuit breaker to [CircuitState.CLOSED] with zeroed counters.
+     */
+    public fun reset() {
+        stateRef.set(CircuitState.CLOSED)
+        failureCount.set(0)
+        successCount.set(0)
+        openedAt.set(0L)
+    }
+
+    /**
+     * Returns a snapshot of the circuit breaker metrics.
+     *
+     * @return A [CircuitMetrics] instance with current state and counts.
+     */
+    public fun metrics(): CircuitMetrics = CircuitMetrics(
+        state = stateRef.get(),
+        totalFailures = failureCount.get(),
+        totalSuccesses = successCount.get(),
+        consecutiveFailures = failureCount.get(),
+    )
+
     private fun checkState(): CircuitState {
         val current = stateRef.get()
         if (current == CircuitState.OPEN) {

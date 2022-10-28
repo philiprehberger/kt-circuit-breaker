@@ -139,4 +139,75 @@ class CircuitBreakerTest {
         }
         assertEquals(CircuitState.CLOSED, cb.state)
     }
+
+    @Test
+    fun `executeWithFallback returns fallback when circuit is open`() = runTest {
+        val cb = circuitBreaker("test") {
+            failureThreshold = 1
+            resetTimeout = 60000.milliseconds
+        }
+        runCatching { cb.execute { throw RuntimeException("fail") } }
+        assertEquals(CircuitState.OPEN, cb.state)
+
+        val result = cb.executeWithFallback(fallback = { "fallback-value" }) { "primary" }
+        assertEquals("fallback-value", result)
+    }
+
+    @Test
+    fun `executeWithFallback returns primary when circuit is closed`() = runTest {
+        val cb = circuitBreaker("test") {
+            failureThreshold = 5
+        }
+        val result = cb.executeWithFallback(fallback = { "fallback" }) { "primary" }
+        assertEquals("primary", result)
+    }
+
+    @Test
+    fun `forceOpen forces circuit to open state`() {
+        val cb = circuitBreaker("test") { failureThreshold = 100 }
+        assertEquals(CircuitState.CLOSED, cb.state)
+        cb.forceOpen()
+        assertEquals(CircuitState.OPEN, cb.state)
+    }
+
+    @Test
+    fun `forceClosed forces circuit to closed state`() = runTest {
+        val cb = circuitBreaker("test") {
+            failureThreshold = 1
+            resetTimeout = 60000.milliseconds
+        }
+        runCatching { cb.execute { throw RuntimeException("fail") } }
+        assertEquals(CircuitState.OPEN, cb.state)
+        cb.forceClosed()
+        assertEquals(CircuitState.CLOSED, cb.state)
+    }
+
+    @Test
+    fun `forceHalfOpen forces circuit to half-open state`() {
+        val cb = circuitBreaker("test") { failureThreshold = 100 }
+        cb.forceHalfOpen()
+        assertEquals(CircuitState.HALF_OPEN, cb.state)
+    }
+
+    @Test
+    fun `reset clears circuit to closed state`() = runTest {
+        val cb = circuitBreaker("test") {
+            failureThreshold = 1
+            resetTimeout = 60000.milliseconds
+        }
+        runCatching { cb.execute { throw RuntimeException("fail") } }
+        assertEquals(CircuitState.OPEN, cb.state)
+        cb.reset()
+        assertEquals(CircuitState.CLOSED, cb.state)
+    }
+
+    @Test
+    fun `metrics returns current state`() = runTest {
+        val cb = circuitBreaker("test") {
+            failureThreshold = 3
+        }
+        val m = cb.metrics()
+        assertEquals(CircuitState.CLOSED, m.state)
+        assertEquals(0, m.totalFailures)
+    }
 }
