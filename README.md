@@ -1,6 +1,6 @@
 # kt-circuit-breaker
 
-[![CI](https://github.com/philiprehberger/kt-circuit-breaker/actions/workflows/ci.yml/badge.svg)](https://github.com/philiprehberger/kt-circuit-breaker/actions/workflows/ci.yml)
+[![CI](https://github.com/philiprehberger/kt-circuit-breaker/actions/workflows/publish.yml/badge.svg)](https://github.com/philiprehberger/kt-circuit-breaker/actions/workflows/publish.yml)
 [![Maven Central](https://img.shields.io/maven-central/v/com.philiprehberger/circuit-breaker)](https://central.sonatype.com/artifact/com.philiprehberger/circuit-breaker)
 
 Coroutine-aware circuit breaker for resilient Kotlin services.
