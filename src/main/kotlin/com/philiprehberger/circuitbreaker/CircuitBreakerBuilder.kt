@@ -16,7 +16,7 @@ package com.philiprehberger.circuitbreaker
  * @param block Configuration block for the circuit breaker.
  * @return A configured [CircuitBreaker] instance.
  */
-fun circuitBreaker(name: String, block: CircuitBreakerConfig.Builder.() -> Unit): CircuitBreaker {
+public fun circuitBreaker(name: String, block: CircuitBreakerConfig.Builder.() -> Unit): CircuitBreaker {
     val config = CircuitBreakerConfig.Builder().apply(block).build()
     return CircuitBreaker(name, config)
 }

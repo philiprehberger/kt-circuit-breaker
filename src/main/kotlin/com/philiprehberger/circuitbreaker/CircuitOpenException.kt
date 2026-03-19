@@ -5,4 +5,4 @@ package com.philiprehberger.circuitbreaker
  *
  * @param message A description of why the circuit is open.
  */
-class CircuitOpenException(message: String) : RuntimeException(message)
+public class CircuitOpenException(message: String) : RuntimeException(message)

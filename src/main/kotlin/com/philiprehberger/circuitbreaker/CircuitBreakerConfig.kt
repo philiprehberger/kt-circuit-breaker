@@ -14,27 +14,27 @@ import kotlin.time.Duration.Companion.seconds
  * @property ignoreExceptions Exception types that are never counted as failures.
  * @property onStateChange Callback invoked when the circuit state changes.
  */
-data class CircuitBreakerConfig(
-    val failureThreshold: Int = 5,
-    val successThreshold: Int = 1,
-    val resetTimeout: Duration = 30.seconds,
-    val recordExceptions: Set<KClass<out Throwable>> = emptySet(),
-    val ignoreExceptions: Set<KClass<out Throwable>> = emptySet(),
-    val onStateChange: (CircuitState, CircuitState) -> Unit = { _, _ -> },
+public data class CircuitBreakerConfig(
+    public val failureThreshold: Int = 5,
+    public val successThreshold: Int = 1,
+    public val resetTimeout: Duration = 30.seconds,
+    public val recordExceptions: Set<KClass<out Throwable>> = emptySet(),
+    public val ignoreExceptions: Set<KClass<out Throwable>> = emptySet(),
+    public val onStateChange: (CircuitState, CircuitState) -> Unit = { _, _ -> },
 ) {
 
     /**
      * Builder for constructing a [CircuitBreakerConfig] via DSL.
      */
-    class Builder {
+    public class Builder {
         /** Number of consecutive failures before the circuit opens. */
-        var failureThreshold: Int = 5
+        public var failureThreshold: Int = 5
 
         /** Number of consecutive successes in half-open state to close the circuit. */
-        var successThreshold: Int = 1
+        public var successThreshold: Int = 1
 
         /** Duration to wait in the open state before transitioning to half-open. */
-        var resetTimeout: Duration = 30.seconds
+        public var resetTimeout: Duration = 30.seconds
 
         @PublishedApi internal val recordExceptions = mutableSetOf<KClass<out Throwable>>()
         @PublishedApi internal val ignoreExceptions = mutableSetOf<KClass<out Throwable>>()
@@ -44,14 +44,14 @@ data class CircuitBreakerConfig(
          * Registers an exception type to be counted as a failure.
          * If no types are registered, all exceptions count as failures.
          */
-        inline fun <reified T : Throwable> recordException() {
+        public inline fun <reified T : Throwable> recordException() {
             recordExceptions.add(T::class)
         }
 
         /**
          * Registers an exception type to be ignored (never counted as a failure).
          */
-        inline fun <reified T : Throwable> ignoreException() {
+        public inline fun <reified T : Throwable> ignoreException() {
             ignoreExceptions.add(T::class)
         }
 
@@ -60,7 +60,7 @@ data class CircuitBreakerConfig(
          *
          * @param callback Receives the old state and the new state.
          */
-        fun onStateChange(callback: (from: CircuitState, to: CircuitState) -> Unit) {
+        public fun onStateChange(callback: (from: CircuitState, to: CircuitState) -> Unit) {
             this.onStateChange = callback
         }
 
