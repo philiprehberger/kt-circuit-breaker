@@ -36,8 +36,8 @@ public data class CircuitBreakerConfig(
         /** Duration to wait in the open state before transitioning to half-open. */
         public var resetTimeout: Duration = 30.seconds
 
-        @PublishedApi internal val recordExceptions = mutableSetOf<KClass<out Throwable>>()
-        @PublishedApi internal val ignoreExceptions = mutableSetOf<KClass<out Throwable>>()
+        @PublishedApi internal val recordExceptions: MutableSet<KClass<out Throwable>> = mutableSetOf<KClass<out Throwable>>()
+        @PublishedApi internal val ignoreExceptions: MutableSet<KClass<out Throwable>> = mutableSetOf<KClass<out Throwable>>()
         private var onStateChange: (CircuitState, CircuitState) -> Unit = { _, _ -> }
 
         /**
