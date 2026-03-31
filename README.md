@@ -1,9 +1,8 @@
 # circuit-breaker
 
 [![Tests](https://github.com/philiprehberger/kt-circuit-breaker/actions/workflows/publish.yml/badge.svg)](https://github.com/philiprehberger/kt-circuit-breaker/actions/workflows/publish.yml)
-[![Maven Central](https://img.shields.io/maven-central/v/com.philiprehberger/circuit-breaker)](https://central.sonatype.com/artifact/com.philiprehberger/circuit-breaker)
-[![License](https://img.shields.io/github/license/philiprehberger/kt-circuit-breaker)](LICENSE)
-[![Sponsor](https://img.shields.io/badge/sponsor-GitHub%20Sponsors-ec6cb9)](https://github.com/sponsors/philiprehberger)
+[![Maven Central](https://img.shields.io/maven-central/v/com.philiprehberger/circuit-breaker.svg)](https://central.sonatype.com/artifact/com.philiprehberger/circuit-breaker)
+[![Last updated](https://img.shields.io/github/last-commit/philiprehberger/kt-circuit-breaker)](https://github.com/philiprehberger/kt-circuit-breaker/commits/main)
 
 Coroutine-aware circuit breaker for resilient Kotlin services.
 
@@ -85,6 +84,24 @@ val breaker = circuitBreaker("api") {
 ./gradlew build      # Build JAR
 ```
 
+## Support
+
+If you find this project useful:
+
+⭐ [Star the repo](https://github.com/philiprehberger/kt-circuit-breaker)
+
+🐛 [Report issues](https://github.com/philiprehberger/kt-circuit-breaker/issues?q=is%3Aissue+is%3Aopen+label%3Abug)
+
+💡 [Suggest features](https://github.com/philiprehberger/kt-circuit-breaker/issues?q=is%3Aissue+is%3Aopen+label%3Aenhancement)
+
+❤️ [Sponsor development](https://github.com/sponsors/philiprehberger)
+
+🌐 [All Open Source Projects](https://philiprehberger.com/open-source-packages)
+
+💻 [GitHub Profile](https://github.com/philiprehberger)
+
+🔗 [LinkedIn Profile](https://www.linkedin.com/in/philiprehberger)
+
 ## License
 
-MIT
+[MIT](LICENSE)
