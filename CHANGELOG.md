@@ -1,5 +1,12 @@
 # Changelog
 
+## 0.2.0 (2026-03-31)
+
+- Add `executeWithFallback()` for automatic fallback when circuit is open
+- Add `forceOpen()`, `forceClosed()`, `forceHalfOpen()` for manual state control
+- Add `reset()` to clear circuit to closed state with zeroed counters
+- Add `metrics()` returning `CircuitMetrics` with state and failure/success counts
+
 ## 0.1.7 (2026-03-31)
 
 - Standardize README to 3-badge format with emoji Support section
